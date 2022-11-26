@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import sys
+from sys import stderr, argv
 from plistlib import load
 
 primary_colors = ['Background Color', 'Foreground Color']
@@ -59,8 +59,8 @@ def main(file_name):
             print(bright_colors[i - 8], get_hex(f'Ansi {i} Color'))
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print('You have to specifiy the .itermcolors file on the command line!', file=sys.stderr)
+    if len(argv) < 2:
+        print('You have to specifiy the .itermcolors file on the command line!', file=stderr)
         exit(1)
 
-    main(sys.argv[1])
+    main(argv[1])
