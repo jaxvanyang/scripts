@@ -6,6 +6,8 @@ from plistlib import load
 # Color names
 primary_colors = ['Background Color', 'Foreground Color']
 primary_colors_vscode = ['background', 'foreground']
+cursor_colors = ['Cursor Color', 'Cursor Text Color']
+cursor_colors_vscode = ['background', 'foreground']
 selection_colors = ['Selected Text Color', 'Selection Color']
 selection_colors_vscode = ['selectionForeground', 'selectionBackground']
 normal_colors = [
@@ -45,12 +47,19 @@ def main(file_name):
         def print_vscode_color(color_name, color):
             print(f'"terminal.{color_name}": "{get_hex(color)}",')
 
+        def print_vscode_cursor_color(color_name, color):
+            print(f'"terminalCursor.{color_name}": "{get_hex(color)}",')
+
         print(f'// converted from {file_name}')
 
         # Primary colors
         print("// it's recommended to comment out the background line for consistency")
         for i, color in enumerate(primary_colors):
             print_vscode_color(primary_colors_vscode[i], color)
+
+        # Cursor colors
+        for i, color in enumerate(cursor_colors):
+            print_vscode_cursor_color(cursor_colors_vscode[i], color)
 
         # Selection colors
         for i, color in enumerate(selection_colors):
