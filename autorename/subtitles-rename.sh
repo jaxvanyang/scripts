@@ -8,22 +8,24 @@ eposides=10
 rename() {
 	for i in $(seq -f "%02g" $eposides); do
 		id="S${season}E${i}"
-		video="$(ls -- *${id}*.mkv)"
-		sub="$(ls -- *${id}*.ass)"
+		video="$(find . -name "*${id}*.mkv")"
+		sub="$(find . -name "*${id}*.ass")"
 
-		newname="${video//.mkv/.Chinese-English.ass}"
+		newname="${video//.mkv/.Chinese(中英双语).default.ass}"
 
 		mv "${sub}" "${newname}"
 	done
 }
 
 main() {
-	if [ $# -ge 1 ]; then
+	if [ $# -ne 0 ]; then
 		season="$(printf '%02d' ${1})"
+		shift
 	fi
 
-	if [ $# -ge 2 ]; then
-		eposides="${2}"
+	if [ $# -ne 0 ]; then
+		eposides="${1}"
+		shift
 	fi
 
 	rename
