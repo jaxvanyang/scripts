@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-# shellcheck disable=2086
-
 season=01
 eposides=10
 
 rename() {
-	for i in $(seq -f "%02g" $eposides); do
+	for i in $(seq -f "%02g" "$eposides"); do
 		id="S${season}E${i}"
 		video="$(find . -name "*${id}*.mkv")"
 		sub="$(find . -name "*${id}*.ass")"
@@ -19,7 +17,7 @@ rename() {
 
 main() {
 	if [ $# -ne 0 ]; then
-		season="$(printf '%02d' ${1})"
+		season="$(printf '%02d' "${1}")"
 		shift
 	fi
 
