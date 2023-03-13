@@ -8,7 +8,7 @@
 # 	parallel <script.sh>
 
 parallel-run() {
-	gawk '{print $0 " > " NR ".log"}' "${1}" | sed "s/^.*\$/'\0'/" | xargs -L 1 -P 4 sh -c
+	gawk '{print $0 " &> " NR ".log"}' "${1}" | sed "s/^.*\$/'\0'/" | xargs -L 1 -P 4 sh -c
 }
 
 main() {
