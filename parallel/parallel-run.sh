@@ -2,11 +2,13 @@
 #
 # Run script lines in parallel.
 #
+# Note: The script file must not contains single quote "'"
+#
 # Usage:
 # 	parallel <script.sh>
 
 parallel-run() {
-	sed "s/^.*$/\'\0\'/" "${1}" | xargs -L 1 -P 4 sh -c
+	gawk '{print $0 " > " NR ".log"}' "${1}" | sed "s/^.*\$/'\0'/" | xargs -L 1 -P 4 sh -c
 }
 
 main() {
