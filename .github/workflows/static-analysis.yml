@@ -3,13 +3,11 @@ name: Static Analysis
 on:
   push:
     paths:
-      - "automkdir/*.sh"
-      - "autorename/*.sh"
+      - "**/*.sh"
 
   pull_request:
     paths:
-      - "automkdir/*.sh"
-      - "autorename/*.sh"
+      - "**/*.sh"
 
   workflow_dispatch:
 
