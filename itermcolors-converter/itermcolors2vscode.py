@@ -50,6 +50,8 @@ def main(file_name):
         def print_vscode_cursor_color(color_name, color):
             print(f'"terminalCursor.{color_name}": "{get_hex(color)}",')
 
+
+        print(f'// usage see https://stackoverflow.com/questions/42307949/color-theme-for-vs-code-integrated-terminal')
         print(f'// converted from {file_name}')
 
         # Primary colors
