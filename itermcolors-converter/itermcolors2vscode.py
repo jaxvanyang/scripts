@@ -7,7 +7,7 @@ from plistlib import load
 primary_colors = ['Background Color', 'Foreground Color']
 primary_colors_vscode = ['background', 'foreground']
 cursor_colors = ['Cursor Color', 'Cursor Text Color']
-cursor_colors_vscode = ['background', 'foreground']
+cursor_colors_vscode = ['foreground', 'background']
 selection_colors = ['Selected Text Color', 'Selection Color']
 selection_colors_vscode = ['selectionForeground', 'selectionBackground']
 normal_colors = [
