@@ -8,10 +8,10 @@ PREFIX="${PREFIX:=$HOME/.local/bin}"
 # TODO: use signal to trigger help_and_exit()
 help_and_exit() {
 		echo "NAME"
-		echo -e "\t$0 - add an executable to your local bin path, e.g., \$home/.local/bin"
+		echo -e "\tadd-local-bin - add an executable to your local bin path, e.g., \$home/.local/bin"
 		echo
 		echo "SYNOPSIS"
-		echo -e "\t$0 <executable> [alias]"
+		echo -e "\tadd-local-bin <executable> [alias]"
 		echo
 		echo "DESCRIPTION"
 		echo -e "\tThis command will create a wrapper script in \$PREFIX, which is \$HOME/.local/bin by default."
@@ -19,16 +19,16 @@ help_and_exit() {
 		echo -e "\tprovided, it will be named as the alias argument."
 		echo
 		echo "EXAMPLES"
-		echo -e "\t$0 hello"
+		echo -e "\tadd-local-bin hello"
 		echo -e "\t\tCreate a wrapper script for hello in current directory."
 		echo
-		echo -e "\t$0 /path/to/hello"
+		echo -e "\tadd-local-bin /path/to/hello"
 		echo -e "\t\tCreate a wrapper script for hello using absolute path."
 		echo
-		echo -e "\t$0 hello foo"
+		echo -e "\tadd-local-bin hello foo"
 		echo -e "\t\tCreate a wrapper script for hello, but name it as foo."
 		echo
-		echo -e "\tPREFIX=/path/to/install $0 hello"
+		echo -e "\tPREFIX=/path/to/install add-local-bin hello"
 		echo -e "\t\tCreate a wrapper script for hello, but in a custom directory."
 
 		exit 1
