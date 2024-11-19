@@ -111,7 +111,7 @@ exec "$executable" "\$@"
 EOF
 
 	# strip any "./" in executable path
-	sed -i 's#\./##g' "$wrapper"
+	sed -i -e 's#\./##g' "$wrapper"
 
 	chmod +x "$wrapper"
 }
