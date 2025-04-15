@@ -26,7 +26,6 @@ help_msg() {
 	echo -e 'Please name a file\n\nUsage: runner.sh <source_file>'
 }
 
-
 if [ $# -lt 1 ]; then
 	to_red
 	help_msg
@@ -47,9 +46,9 @@ run_out() {
 	elif [ "$2" = 'java' ]; then
 		cmd="java ${1%.*}"
 	elif [ "$2" = 'kt' ]; then
-		cmd="java -jar $1";
+		cmd="java -jar $1"
 	elif [ "$2" = 'py' ]; then
-		cmd="python $1";
+		cmd="python $1"
 	else
 		to_red
 		echo 'Error: Unknown file type!'
@@ -72,7 +71,7 @@ run() {
 	start_time=$(date +%s%N)
 
 	if [ -e input.txt ]; then
-		run_out "$1" "$1" < input.txt
+		run_out "$1" "$1" <input.txt
 	else
 		run_out "$1" "$2"
 	fi
@@ -80,22 +79,22 @@ run() {
 	end_time=$(date +%s%N)
 
 	to_green
-	echo -e "Log: Execution time: $(( (end_time - start_time) / 1000000))ms"
+	echo -e "Log: Execution time: $(((end_time - start_time) / 1000000))ms"
 }
 
 # examples are after statements
 # the default type is C++ source file
-path=$1;					# test.cc
-file_name=${path%.*};	# test
-extension=${path##*.};	# cc
-out_file=$file_name.out;	# test.out
+path=$1                 # test.cc
+file_name=${path%.*}    # test
+extension=${path##*.}   # cc
+out_file=$file_name.out # test.out
 
 # use normal extension as language type
-lang='cpp';
+lang='cpp'
 
 if [[ $extension == c ]]; then
 	lang='c'
-	out_file=$file_name.exe	# be different to C++ out file
+	out_file=$file_name.exe # be different to C++ out file
 elif [ "$extension" = 'java' ]; then
 	lang='java'
 	out_file=$file_name.class
@@ -104,7 +103,7 @@ elif [ "$extension" = 'kt' ]; then
 	out_file=$file_name.jar
 elif [ "$extension" = 'py' ]; then
 	lang='py'
-	out_file=$path	# Python has no out file
+	out_file=$path # Python has no out file
 elif [[ ! $extension =~ ^cc$|^cpp$|^cx$ ]]; then
 	to_red
 	echo 'Error: Unknow file type!'
@@ -116,8 +115,8 @@ if [[ $lang =~ ^c$|^cpp$ && ! $out_file =~ ^/.*$ ]]; then
 fi
 
 if [ -e "$out_file" ]; then
-	source_time=$(stat -c %Y "$path");
-	out_time=$(stat -c %Y "$out_file");
+	source_time=$(stat -c %Y "$path")
+	out_time=$(stat -c %Y "$out_file")
 
 	if [ "$source_time" -lt "$out_time" ]; then
 		to_green
@@ -161,7 +160,7 @@ compile() {
 	end_time=$(date +%s%N)
 
 	to_green
-	echo "Log: Compilation time: $(( (end_time - start_time) / 1000000 ))ms"
+	echo "Log: Compilation time: $(((end_time - start_time) / 1000000))ms"
 }
 
 compile "$path" "$out_file" "$lang" && run "$out_file" "$lang"

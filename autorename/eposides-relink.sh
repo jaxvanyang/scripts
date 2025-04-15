@@ -48,19 +48,19 @@ main() {
 
 	while true; do
 		case "$1" in
-			'-d')
-				target_dir="$2"
-				shift 2
-				continue
-				;;
-			'--')
-				shift
-				break
-				;;
-			*)
-				echo 'Internal error!' >&2
-				exit 1
-				;;
+		'-d')
+			target_dir="$2"
+			shift 2
+			continue
+			;;
+		'--')
+			shift
+			break
+			;;
+		*)
+			echo 'Internal error!' >&2
+			exit 1
+			;;
 		esac
 	done
 
