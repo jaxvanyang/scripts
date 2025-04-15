@@ -7,31 +7,31 @@ PREFIX="${PREFIX:=$HOME/.local/bin}"
 
 # TODO: use signal to trigger help_and_exit()
 help_and_exit() {
-		echo "NAME"
-		echo -e "\tadd-local-bin - add an executable to your local bin path, e.g., \$home/.local/bin"
-		echo
-		echo "SYNOPSIS"
-		echo -e "\tadd-local-bin <executable> [alias]"
-		echo
-		echo "DESCRIPTION"
-		echo -e "\tThis command will create a wrapper script in \$PREFIX, which is \$HOME/.local/bin by default."
-		echo -e "\tThe wrapper script is named as the same as the executable's basename. If the alias argument is"
-		echo -e "\tprovided, it will be named as the alias argument."
-		echo
-		echo "EXAMPLES"
-		echo -e "\tadd-local-bin hello"
-		echo -e "\t\tCreate a wrapper script for hello in current directory."
-		echo
-		echo -e "\tadd-local-bin /path/to/hello"
-		echo -e "\t\tCreate a wrapper script for hello using absolute path."
-		echo
-		echo -e "\tadd-local-bin hello foo"
-		echo -e "\t\tCreate a wrapper script for hello, but name it as foo."
-		echo
-		echo -e "\tPREFIX=/path/to/install add-local-bin hello"
-		echo -e "\t\tCreate a wrapper script for hello, but in a custom directory."
+	echo "NAME"
+	echo -e "\tadd-local-bin - add an executable to your local bin path, e.g., \$home/.local/bin"
+	echo
+	echo "SYNOPSIS"
+	echo -e "\tadd-local-bin <executable> [alias]"
+	echo
+	echo "DESCRIPTION"
+	echo -e "\tThis command will create a wrapper script in \$PREFIX, which is \$HOME/.local/bin by default."
+	echo -e "\tThe wrapper script is named as the same as the executable's basename. If the alias argument is"
+	echo -e "\tprovided, it will be named as the alias argument."
+	echo
+	echo "EXAMPLES"
+	echo -e "\tadd-local-bin hello"
+	echo -e "\t\tCreate a wrapper script for hello in current directory."
+	echo
+	echo -e "\tadd-local-bin /path/to/hello"
+	echo -e "\t\tCreate a wrapper script for hello using absolute path."
+	echo
+	echo -e "\tadd-local-bin hello foo"
+	echo -e "\t\tCreate a wrapper script for hello, but name it as foo."
+	echo
+	echo -e "\tPREFIX=/path/to/install add-local-bin hello"
+	echo -e "\t\tCreate a wrapper script for hello, but in a custom directory."
 
-		exit 1
+	exit 1
 }
 
 main() {
@@ -40,8 +40,8 @@ main() {
 		help_and_exit
 	fi
 
-	name="$(basename "$1")"
-	executable="$1"
+	name=$(basename "$1")
+	executable=$(realpath "$1")
 
 	# Change executable to absolute path if it's relative path
 	if [[ ! "$executable" =~ ^/.*$ ]]; then
@@ -59,10 +59,10 @@ main() {
 		name="$2"
 	fi
 
-	wrapper="$PREFIX/$name"
+	wrapper=$(realpath "$PREFIX/$name")
 
 	# Check the target wrapper path before processing
-	
+
 	# Check if it's a directory
 	if [ -d "$wrapper" ]; then
 		echo "The wrapper - $wrapper/ already exists and it's a directory."
@@ -103,17 +103,7 @@ main() {
 		fi
 	fi
 
-	# Create the wrapper script
-	cat > "$wrapper" <<EOF
-#/usr/bin/env bash
-
-exec "$executable" "\$@"
-EOF
-
-	# strip any "./" in executable path
-	sed -i -e 's#\./##g' "$wrapper"
-
-	chmod +x "$wrapper"
+	ln -sf "$executable" "$wrapper"
 }
 
 main "$@"
