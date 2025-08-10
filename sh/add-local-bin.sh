@@ -59,7 +59,11 @@ main() {
 		name="$2"
 	fi
 
+	wrapper="$PREFIX/$name"
+	# realpath needs the file exists on macOS
+	touch "$wrapper"
 	wrapper=$(realpath "$PREFIX/$name")
+	rm "$wrapper"
 
 	# Check the target wrapper path before processing
 
