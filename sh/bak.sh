@@ -3,7 +3,7 @@
 set -e
 
 while [ "$#" -ne 0 ]; do
-	echo "mv $1 $1.bak"
-	mv "$1" "$1.bak"
+	echo "cp $1 $1.bak"
+	cp "$1" "$1.bak"
 	shift
 done
